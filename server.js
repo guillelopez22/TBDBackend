@@ -16,7 +16,7 @@ server.connection({
     }
 });
 
-mongoose.connect('mongodb://admin:admin@ds123361.mlab.com:23361/thespot');
+mongoose.connect('mongodb://admin:admin@ds257485.mlab.com:57485/tbd');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
