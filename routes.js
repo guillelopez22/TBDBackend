@@ -1,16 +1,6 @@
-var bebidasController = require('./controllers/bebidasController');
-var combosController = require('./controllers/combosController');
-var facturasController = require('./controllers/facturasController');
-var insumosController = require('./controllers/insumosController');
-var mesasController = require('./controllers/mesasController');
-var ordenesController = require('./controllers/ordenesController');
-var personalController = require('./controllers/personalController');
-var prod_elaborado_detailController = require('./controllers/prod_elaborado_detailController');
-var productos_elaboradosController = require('./controllers/productos_elaboradosController');
-var productosController = require('./controllers/productosController');
-var promocionesController = require('./controllers/promocionesController');
-var proveedorController = require('./controllers/proveedorController');
-var usuariosController = require('./controllers/usuariosController');
+var empleadoController = require('./controllers/empleadoController');
+var empleadorController = require('./controllers/empleadorController');
+var oferta_trabajoController = require('./controllers/oferta_trabajoController');
 var authenticationController = require('./controllers/authenticationController');
 exports.endpoints = [
 	{
