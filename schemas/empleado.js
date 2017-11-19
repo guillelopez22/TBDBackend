@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var EmpleadoSchema = new mongoose.Schema({
   nombre : String,
-  identificacion: String,
+  identificacion: {type: String, unique: true, required: true},
   celular: Number,
   nombre_papa: String,
   nombre_mama: String,
@@ -14,7 +14,9 @@ var EmpleadoSchema = new mongoose.Schema({
   secundaria: [String],
   universidad: [String],
   experiencia_laboral: [String],
-  requisito_empleo: [String]
+  requisito_empleo: [String],
+  password: String,
+  scope: String
 });
 
 module.exports = mongoose.model('empleado', EmpleadoSchema);

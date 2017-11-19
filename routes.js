@@ -103,6 +103,15 @@ exports.endpoints = [
 			method: 'POST',
 			path: '/ofertas/create',
 			config: oferta_trabajoController.createOferta_Trabajo
- 	}
+ 	},
+	{
+		method: 'POST',
+		path: '/login',
+		config: authenticationController.login
+	},{
+		method: 'POST',
+		path: '/signup',
+		config: empleadoController.singUp
+	}
 
 ];

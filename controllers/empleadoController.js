@@ -1,5 +1,6 @@
 var empleado = require('../schemas/empleado.js');
 var mongoose = require('mongoose');
+var SHA3 = require("crypto-js/sha3");
 
 exports.getEmpleados = {
 
@@ -35,7 +36,6 @@ exports.getEmpleadoIdentificacion = {
     });
   }
 }
-
 exports.editEmpleado = {
 
   handler: function(request, reply){
@@ -101,6 +101,28 @@ exports.createEmpleado = {
       universidad: request.payload.universidad,
       experiencia_laboral: request.payload.experiencia_laboral,
       requisito_empleo: request.payload.requisito_empleo
+    });
+    newEmpleado.save(function(err){
+      if(!err){
+        return reply({
+          success: true
+        });
+      }else{
+        return reply({
+          success: false
+        })
+      }
+    });
+  }
+}
+exports.singUp = {
+
+  handler: function(request, reply){
+    var newEmpleado = new empleado({
+      nombre : request.payload.nombre,
+      identificacion : request.payload.identidad,
+      password: String(SHA3(request.payload.password)),
+      scope: request.payload.scope
     });
     newEmpleado.save(function(err){
       if(!err){
