@@ -47,6 +47,7 @@ exports.editEmpleador = {
           ceo : request.payload.ceo,
           direccion : request.payload.direccion,
           telefono: request.payload.telefono,
+          password: request.payload.password,
         }
       }, function(err){
         if(err){
