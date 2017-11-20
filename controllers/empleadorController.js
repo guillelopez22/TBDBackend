@@ -46,7 +46,7 @@ exports.editEmpleador = {
           rtn : request.payload.rtn,
           ceo : request.payload.ceo,
           direccion : request.payload.direccion,
-          telefono: request.payload.telefono
+          telefono: request.payload.telefono,
         }
       }, function(err){
         if(err){
@@ -81,7 +81,9 @@ exports.createEmpleador = {
       rtn : request.payload.rtn,
       ceo : request.payload.ceo,
       direccion : request.payload.direccion,
-      telefono: request.payload.telefono
+      telefono: request.payload.telefono,
+      password: request.payload.password,
+      scope: request.payload.scope
     });
     newEmpleador.save(function(err){
       if(!err){
