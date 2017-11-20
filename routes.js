@@ -15,15 +15,10 @@ exports.endpoints = [
 	},
 	{
 			method: 'GET',
-		 	path: '/empleados',
-		 	config: empleadoController.getEmpleados
- 	},
-
-	{
-			method: 'GET',
-			path: '/empleados/searchbyid/{_id}',
+			path: '/empleados/searchbyid/{identificacion}',
 			config: empleadoController.getEmpleadoId
  	},
+
 	{
 			method: 'GET',
 			path: '/empleados/searchbyidentificacion/{id}',
@@ -100,9 +95,10 @@ exports.endpoints = [
 			config: oferta_trabajoController.deleteOferta_Trabajo
  	},
 	{
+		//revisado
 			method: 'POST',
 			path: '/ofertas/create',
-			config: oferta_trabajoController.createOferta_Trabajo
+			config: oferta_trabajoController.createOferta
  	},
 	{
 		method: 'POST',
