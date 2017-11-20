@@ -9,6 +9,21 @@ exports.getEmpleados = {
     reply(empleados);
   }
 }
+
+exports.checkIdentidad = {
+  handler:function(req, res){
+    empleado.findOne({'identificacion': req.params.identificacion}, function(err, Empleado){
+      if(!err && Empleado){
+        return res({existe: true});
+      }else if(!err){
+        return res({existe: false});
+      }else if(err){
+        return res({existe: false});
+      }
+    });
+  }
+}
+
 exports.getEmpleadoId = {
 
   handler : function(request, reply){
@@ -87,20 +102,27 @@ exports.createEmpleado = {
 
   handler: function(request, reply){
     var newEmpleado = new empleado({
-      nombre : request.payload.nombre,
-      identificacion : request.payload.idProveedor,
-      celular : request.payload.tipo,
-      nombre_papa : request.payload.inventario,
-      nombre_mama : request.payload.descripcion,
-      estado_civil : request.payload.estado_civil,
+      nombre : request.payload.name,
+      identificacion : request.payload.id,
+      nombre_papa : request.payload.namePapa,
+      nombre_mama : request.payload.nameMama,
+      estado_civil : request.payload.civil,
       nacionalidad: request.payload.nacionalidad,
       genero: request.payload.genero,
-      antecedentes: request.payload.antecedentes,
-      primaria: request.payload.primaria,
-      secundaria: request.payload.secundaria,
-      universidad: request.payload.universidad,
+      primaria_promedio: request.payload.primaria_promedio,
+      primaria_centro: request.payload.primaria_centro,
+      secundaria_promedio: request.payload.secundaria_promedio,
+      secundaria_carrera: request.payload.secundaria_carrera,
+      secundaria_centro: request.payload.secundaria_centro,
+      universidad_promedio: request.payload.universidad_promedio,
+      universidad_centro: request.payload.universidad_centro,
+      universidad_carrera: request.payload.universidad_carrera,
       experiencia_laboral: request.payload.experiencia_laboral,
-      requisito_empleo: request.payload.requisito_empleo
+      salario_aspirado: request.payload.salario_aspirado,
+      tipo_contrato: request.payload.tipo_contrato,
+      puesto_a_buscar: request.payload.puesto_a_buscar,
+      password: String(SHA3(request.payload.password)),
+      scope: request.payload.scope
     });
     newEmpleado.save(function(err){
       if(!err){
@@ -109,7 +131,8 @@ exports.createEmpleado = {
         });
       }else{
         return reply({
-          success: false
+          success: false,
+          error: err
         })
       }
     });

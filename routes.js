@@ -112,6 +112,10 @@ exports.endpoints = [
 		method: 'POST',
 		path: '/signup',
 		config: empleadoController.singUp
+	},{
+		method: 'GET',
+		path: '/checkid/{identificacion}',
+		config: empleadoController.checkIdentidad
 	}
 
 ];
