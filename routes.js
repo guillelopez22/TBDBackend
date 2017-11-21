@@ -72,17 +72,19 @@ exports.endpoints = [
 			path: '/empleadores/create',
 			config: empleadorController.createEmpleador
  	},
+	//revisado
 	{
 			method: 'GET',
 		 	path: '/ofertas',
 		 	config: oferta_trabajoController.getOfertas_Trabajo
  	},
-
+	//revisado
 	{
 			method: 'GET',
 			path: '/ofertas/searchbyid/{_id}',
 			config: oferta_trabajoController.getOfertas_TrabajoId
  	},
+	
  	{
  			method: 'PUT',
  			path: '/ofertas/update/{_id}',
