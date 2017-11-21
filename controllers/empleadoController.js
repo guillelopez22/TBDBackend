@@ -51,6 +51,24 @@ exports.getEmpleadoIdentificacion = {
     });
   }
 }
+
+exports.aplicar ={
+  handler: function(req, res){
+    empleado.update(
+      {'identificacion': req.params.id},
+      {$push:{
+        ofertas_aplicadas: req.payload._id
+      }}, function(err){
+        if (err) {
+          return res({success: false});
+        }else{
+          return res({success: true});
+        }
+      }
+    )
+  }
+}
+
 exports.editEmpleado = {
 
   handler: function(request, reply){

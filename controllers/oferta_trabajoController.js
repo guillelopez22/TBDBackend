@@ -97,12 +97,12 @@ exports.deleteOferta_Trabajo = {
   handler: function(request, reply){
     oferta_trabajo.findOne({'_id' : request.params._id}, function(err, Oferta_Trabajo){
       if(err){
-        return reply(boom.badRequest("Could not delete oferta de trabajo"));
+        return reply({success: false});
       }else if(!err && Oferta_Trabajo){
         Oferta_Trabajo.remove();
-        return reply('Oferta Trabajo deleted succesfully');
+        return reply({success: true});
       }else if(!err){
-        return reply(boom.notFound());
+        return reply({success: false});
       }
     });
   }

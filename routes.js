@@ -94,7 +94,7 @@ exports.endpoints = [
 			path: '/ofertas/searchbyid/{id}',
 			config: oferta_trabajoController.getOfertas_TrabajoId
  	},
-	
+
  	{
  			method: 'PUT',
  			path: '/ofertas/update/{_id}',
@@ -124,6 +124,10 @@ exports.endpoints = [
 		method: 'GET',
 		path: '/checkid/{identificacion}',
 		config: empleadoController.checkIdentidad
+	},{
+		method: 'PUT',
+		path:'/enroll/{id}',
+		config: empleadoController.aplicar
 	}
 
 ];
