@@ -37,8 +37,8 @@ exports.login = {
           }
           console.log("nomon2");
           return reply({ message: boom.notAcceptable('Error Executing Query'), success: false});
-        });
-      }
+        }
+      });
     };
     exports.logout = {
       // auth: {
