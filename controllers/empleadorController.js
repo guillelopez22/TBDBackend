@@ -53,7 +53,7 @@ exports.editEmpleador = {
         if(err){
           return reply(boom.wrap(err, 'Empleador not found'));
         }else{
-          return reply('updated succesfully');
+          return reply({success:true});
         }
       }
     );
