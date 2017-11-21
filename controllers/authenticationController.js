@@ -21,7 +21,7 @@ exports.login = {
           console.log("identidad: "+ empleado[0].identificacion+ " scope: "+ empleado[0].scope);
           return reply({identidad: empleado[0].identificacion, scope: empleado[0].scope, success:true});
         }else{
-          empleador.find({"rtn": request.payload.identidad, "password": password},
+          empleador.find({"rtn": request.payload.identidad, "password": request.payload.password},
           function(err, empleador){
             if(!err){
               if(empleador.length > 0){
