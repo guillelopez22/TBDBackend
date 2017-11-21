@@ -42,7 +42,7 @@ exports.getOfertas_Trabajo = {
 
 exports.getOfertas_TrabajoId = {
   handler : function(request, reply){
-    oferta_trabajo.findOne({'_id' : request.params._id}, function(err, Oferta_Trabajo){
+    oferta_trabajo.findOne({'_id' : request.params.id}, function(err, Oferta_Trabajo){
       if(!err && Oferta_Trabajo){
         return reply({oferta:Oferta_Trabajo,success: true});
       }else if(!err){
