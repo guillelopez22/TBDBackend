@@ -42,8 +42,8 @@ exports.endpoints = [
  	},
 	{
 			method: 'DELETE',
-			path: '/empleados/delete/{identificacion}',
-			config: empleadoController.deleteEmpleadoId
+			path: '/empleados/deleteIdentificacion/{identificacion}',
+			config: empleadoController.deleteEmpleadoIdentificacion
  	},
 	{
 			method: 'POST',
@@ -79,7 +79,7 @@ exports.endpoints = [
  	},
 	{
 			method: 'DELETE',
-			path: '/empleadores/delete/{rtn}',
+			path: '/empleadores/deleteRTN/{rtn}',
 			config: empleadorController.deleteEmpleadorRTN
  	},
 	{
