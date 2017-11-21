@@ -2,6 +2,7 @@ var empleado = require('../schemas/empleado.js');
 var mongoose = require('mongoose');
 var SHA3 = require("crypto-js/sha3");
 
+
 exports.getEmpleados = {
 
   handler: function(request, reply){
@@ -27,17 +28,16 @@ exports.checkIdentidad = {
 exports.getEmpleadoId = {
 
   handler : function(request, reply){
-    empleado.findOne({'_id' : request.params._id}, function(err, Empleado){
+    empleado.findOne({'identificacion' : request.params.identificacion}, function(err, Empleado){
       if(!err && Empleado){
         return reply(Empleado);
-      }else if(!err){
-        return reply(boom.notFound());
-      }else if(err){
-        return reply(boom.wrap(err, 'Empleado not found'));
+      }else{
+        return reply({success:false});
       }
     });
   }
 }
+
 exports.getEmpleadoIdentificacion = {
   handler : function(request, reply){
     empleado.find({'identificacion' : request.params.identificacion}, function(err, Empleados){

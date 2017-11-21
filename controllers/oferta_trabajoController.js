@@ -1,58 +1,97 @@
 var oferta_trabajo = require('../schemas/oferta_trabajo.js');
 var mongoose = require('mongoose');
 
-exports.getOfertas_Trabajo = {
+exports.createOferta = {
+  handler: function (request, reply){
+    var oferta = new oferta_trabajo({
+      tipo_puesto: request.payload.puesto,
+      requisitos_personales: request.payload.personal,
+      requisitos_academicos: request.payload.academicos,
+      requisitos_laborales: request.payload.laborales,
+      requisitos_profesionales: request.payload.profesionales,
+      lugar_empleo: request.payload.lugar,
+      sueldo: request.payload.sueldo,
+      negociable: request.payload.negociable,
+      tipo_contrato: request.payload.contrato,
+      vacantes: request.payload.vacantes,
+      id_solicitantes: request.payload.id_solicitantes,
+      id_empleador: request.payload.id_empleador
+    });
 
+    oferta.save(function(err){
+      if(!err){
+        return reply({
+          success: true
+        })
+      }else{
+        return reply({
+          success: false,
+          err
+        })
+      }
+    });
+  }
+}
+
+exports.getOfertas_Trabajo = {
   handler: function(request, reply){
     var ofertas_trabajo = oferta_trabajo.find({});
     reply(ofertas_trabajo);
   }
 }
-exports.getOfertas_TrabajoId = {
 
+exports.getOfertas_TrabajoId = {
   handler : function(request, reply){
     oferta_trabajo.findOne({'_id' : request.params._id}, function(err, Oferta_Trabajo){
       if(!err && Oferta_Trabajo){
-        return reply(Oferta_Trabajo);
+        return reply({oferta:Oferta_Trabajo,success: true});
       }else if(!err){
-        return reply(boom.notFound());
+        return reply({
+          success: false
+        });
       }else if(err){
-        return reply(boom.wrap(err, 'Oferta de Trabajo not found'));
+        return reply({
+          success:false
+        });
       }
     });
   }
 }
 
 exports.editOferta_Trabajo = {
-
   handler: function(request, reply){
     oferta_trabajo.update(
       {'_id': request.params._id},
       {$set:
         {
-          tipo_puesto: request.payload.tipo_puesto,
-          requisitos_personales: request.payload.requisitos_personales,
-          requisitos_academicos: request.payload.requisitos_academicos,
-          requisitos_sanitario: request.payload.requisitos_sanitario,
-          requisitos_laborales: request.payload.requisitos_laborales,
-          requisitos_profesionales: request.payload.requisitos_profesionales,
-          lugar_empleo: request.payload.lugar_empleo,
+          tipo_puesto: request.payload.puesto,
+          requisitos_personales: request.payload.personal,
+          requisitos_academicos: request.payload.academicos,
+          requisitos_laborales: request.payload.laborales,
+          requisitos_profesionales: request.payload.profesionales,
+          lugar_empleo: request.payload.lugar,
           sueldo: request.payload.sueldo,
-          Condiciones: request.payload.Condiciones,
+          negociable: request.payload.negociable,
+          tipo_contrato: request.payload.contrato,
           vacantes: request.payload.vacantes,
           id_solicitantes: request.payload.id_solicitantes,
           id_empleador: request.payload.id_empleador
         }
       }, function(err){
         if(err){
-          return reply(boom.wrap(err, 'Bebida not found'));
+          return reply({
+            success: false
+          });
         }else{
-          return reply('updated succesfully');
+          return reply({
+            success:true
+          });
         }
       }
     );
   }
 }
+
 exports.deleteOferta_Trabajo = {
 
   handler: function(request, reply){
@@ -64,36 +103,6 @@ exports.deleteOferta_Trabajo = {
         return reply('Oferta Trabajo deleted succesfully');
       }else if(!err){
         return reply(boom.notFound());
-      }
-    });
-  }
-}
-exports.createOferta_Trabajo = {
-
-  handler: function(request, reply){
-    var newOferta_Trabajo = new oferta_trabajo({
-      tipo_puesto: request.payload.tipo_puesto,
-      requisitos_personales: request.payload.requisitos_personales,
-      requisitos_academicos: request.payload.requisitos_academicos,
-      requisitos_sanitario: request.payload.requisitos_sanitario,
-      requisitos_laborales: request.payload.requisitos_laborales,
-      requisitos_profesionales: request.payload.requisitos_profesionales,
-      lugar_empleo: request.payload.lugar_empleo,
-      sueldo: request.payload.sueldo,
-      Condiciones: request.payload.Condiciones,
-      vacantes: request.payload.vacantes,
-      id_solicitantes: request.payload.id_solicitantes,
-      id_empleador: request.payload.id_empleador
-    });
-    newOferta_Trabajo.save(function(err){
-      if(!err){
-        return reply({
-          success: true
-        });
-      }else{
-        return reply({
-          success: false
-        })
       }
     });
   }
