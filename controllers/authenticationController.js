@@ -1,37 +1,32 @@
 var joi = require('joi');
 var boom = require('boom');
-var usuario = require('../schemas/usuario');
-var bcrypt = require('bcrypt');
+var empleado = require('../schemas/empleado');
+var SHA3 = require("crypto-js/sha3");
 
 exports.login = {
     auth: false,
     validate: {
       payload: {
-        usuario: joi.string().required(),
-        contrasena: joi.string().min(2).max(200).required()
+        identidad: joi.string().required(),
+        password: joi.string().min(2).max(200).required()
       }
     },
     handler: function(request, reply) {
-      console.log(request.payload.contrasena);
-      usuario.find({usuario: request.payload.usuario}, function(err, usuario){
-        console.log('usuario: ', request.payload.usuario, 'usuario', usuario)
-        if(err)
-          return reply(boom.notAcceptable('Error Executing Query'));
-        if(usuario.length > 0){
-          bcrypt.compare(request.payload.contrasena, usuario[0].contrasena, function(err, res){
-            console.log('res',res);
-            if(err)
-                return reply(boom.unauthorized('ERROR'));
-            if(res){
-              console.log('before setting cookie');
-              request.cookieAuth.set(usuario[0]);
-              console.log('after setting cookie')
-              return reply({usuario: usuario[0].usuario, scope: usuario[0].scope});
-            }else{
-              return reply(boom.unauthorized('Wrong contrasena'))
-            }
-          });
+      console.log(request.payload.password);
+      var password = String(SHA3(request.payload.password));
+      empleado.find({"identificacion": request.payload.identidad, "password": password}, function(err, empleado){
+        // console.log('identificacion: ', request.payload.identidad, 'empleado', empleado[0])
+        if(!err){
+          if(empleado.length > 0){
+            // request.cookieAuth.set(empleado.identificacion);
+            console.log("identidad: "+ empleado[0].identificacion+ " scope: "+ empleado[0].scope);
+            return reply({identidad: empleado[0].identificacion, scope: empleado[0].scope, success:true});
+          }
+          console.log("nomon");
+          return reply({message: boom.unauthorized('Wrong email or password'), success:false});
         }
+        console.log("nomon2");
+        return reply({ message: boom.notAcceptable('Error Executing Query'), success: false});
       });
     }
 };

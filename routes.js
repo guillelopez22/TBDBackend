@@ -36,6 +36,11 @@ exports.endpoints = [
 			config: empleadoController.deleteEmpleado
  	},
 	{
+			method: 'DELETE',
+			path: '/empleados/deleteIdentificacion/{identificacion}',
+			config: empleadoController.deleteEmpleadoIdentificacion
+ 	},
+	{
 			method: 'POST',
 			path: '/empleados/create',
 			config: empleadoController.createEmpleado
@@ -66,6 +71,11 @@ exports.endpoints = [
 			method: 'DELETE',
 			path: '/empleadores/delete/{_id}',
 			config: empleadorController.deleteEmpleador
+ 	},
+	{
+			method: 'DELETE',
+			path: '/empleadores/deleteRTN/{rtn}',
+			config: empleadorController.deleteEmpleadorRTN
  	},
 	{
 			method: 'POST',
@@ -110,6 +120,10 @@ exports.endpoints = [
 		method: 'POST',
 		path: '/signup',
 		config: empleadoController.singUp
+	},{
+		method: 'GET',
+		path: '/checkid/{identificacion}',
+		config: empleadoController.checkIdentidad
 	}
 
 ];

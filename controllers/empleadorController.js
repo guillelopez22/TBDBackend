@@ -23,7 +23,7 @@ exports.getEmpleadorId = {
 exports.getEmpleadorRTN = {
 
   handler : function(request, reply){
-    combo.find({'rtn' : request.params.rtn}, function(err, Empleadores){
+    empleador.find({'rtn' : request.params.rtn}, function(err, Empleadores){
       if(!err && Empleadores){
         return reply(Empleadores);
       }else if(!err){
@@ -46,13 +46,14 @@ exports.editEmpleador = {
           rtn : request.payload.rtn,
           ceo : request.payload.ceo,
           direccion : request.payload.direccion,
-          telefono: request.payload.telefono
+          telefono: request.payload.telefono,
+          password: request.payload.password,
         }
       }, function(err){
         if(err){
           return reply(boom.wrap(err, 'Empleador not found'));
         }else{
-          return reply('updated succesfully');
+          return reply({success:true});
         }
       }
     );
@@ -65,7 +66,22 @@ exports.deleteEmpleador = {
       if(err){
         return reply(boom.badRequest("Could not delete Empleador"));
       }else if(!err && Empleador){
-        Combo.remove();
+        Empleador.remove();
+        return reply('Empleador deleted succesfully');
+      }else if(!err){
+        return reply(boom.notFound());
+      }
+    });
+  }
+}
+exports.deleteEmpleadorRTN = {
+
+  handler: function(request, reply){
+    empleador.findOne({'rtn' : request.params.rtn}, function(err, Empleador){
+      if(err){
+        return reply(boom.badRequest("Could not delete Empleador"));
+      }else if(!err && Empleador){
+        Empleador.remove();
         return reply('Empleador deleted succesfully');
       }else if(!err){
         return reply(boom.notFound());
@@ -81,7 +97,9 @@ exports.createEmpleador = {
       rtn : request.payload.rtn,
       ceo : request.payload.ceo,
       direccion : request.payload.direccion,
-      telefono: request.payload.telefono
+      telefono: request.payload.telefono,
+      password: request.payload.password,
+      scope: request.payload.scope
     });
     newEmpleador.save(function(err){
       if(!err){

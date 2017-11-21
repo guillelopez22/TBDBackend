@@ -5,7 +5,9 @@ var EmpleadorSchema = new mongoose.Schema({
   rtn: String,
   ceo: String,
   direccion : String,
-  telefono: String
+  telefono: String,
+  password: String,
+  scope: String
 });
 
 module.exports = mongoose.model('empleador', EmpleadorSchema);
