@@ -40,7 +40,7 @@ exports.getEmpleadoId = {
 }
 exports.getEmpleadoIdentificacion = {
   handler : function(request, reply){
-    empleado.find({'identificacion' : request.params.identificacion}, function(err, Empleados){
+    empleado.find({'identificacion' : request.params.id}, function(err, Empleados){
       if(!err && Empleados){
         return reply(Empleados);
       }else if(!err){
@@ -122,7 +122,8 @@ exports.createEmpleado = {
       tipo_contrato: request.payload.tipo_contrato,
       puesto_a_buscar: request.payload.puesto_a_buscar,
       password: String(SHA3(request.payload.password)),
-      scope: request.payload.scope
+      scope: request.payload.scope,
+      ofertas_aplicadas: request.payload.ofertasAplicadas
     });
     newEmpleado.save(function(err){
       if(!err){

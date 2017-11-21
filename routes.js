@@ -85,7 +85,7 @@ exports.endpoints = [
 
 	{
 			method: 'GET',
-			path: '/ofertas/searchbyid/{_id}',
+			path: '/ofertas/searchbyid/{id}',
 			config: oferta_trabajoController.getOfertas_TrabajoId
  	},
  	{

@@ -25,7 +25,8 @@ var EmpleadoSchema = new mongoose.Schema({
   tipo_contrato: String,
   puesto_a_buscar: String,
   password: String,
-  scope: String
+  scope: String,
+  ofertas_aplicadas: [mongoose.Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('empleado', EmpleadoSchema);
