@@ -98,6 +98,21 @@ exports.deleteEmpleado = {
     });
   }
 }
+exports.deleteEmpleadoIdentificacion = {
+
+  handler: function(request, reply){
+    empleado.findOne({'identificacion' : request.params.identificacion}, function(err, Empleado){
+      if(err){
+        return reply(boom.badRequest("Could not delete Empleado"));
+      }else if(!err && Empleado){
+        Empleado.remove();
+        return reply('Empleado deleted succesfully');
+      }else if(!err){
+        return reply(boom.notFound());
+      }
+    });
+  }
+}
 exports.createEmpleado = {
 
   handler: function(request, reply){
