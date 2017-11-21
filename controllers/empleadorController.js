@@ -23,7 +23,7 @@ exports.getEmpleadorId = {
 exports.getEmpleadorRTN = {
 
   handler : function(request, reply){
-    combo.find({'rtn' : request.params.rtn}, function(err, Empleadores){
+    empleador.find({'rtn' : request.params.rtn}, function(err, Empleadores){
       if(!err && Empleadores){
         return reply(Empleadores);
       }else if(!err){
@@ -47,12 +47,13 @@ exports.editEmpleador = {
           ceo : request.payload.ceo,
           direccion : request.payload.direccion,
           telefono: request.payload.telefono,
+          password: request.payload.password,
         }
       }, function(err){
         if(err){
           return reply(boom.wrap(err, 'Empleador not found'));
         }else{
-          return reply('updated succesfully');
+          return reply({success:true});
         }
       }
     );
@@ -65,7 +66,7 @@ exports.deleteEmpleador = {
       if(err){
         return reply(boom.badRequest("Could not delete Empleador"));
       }else if(!err && Empleador){
-        Combo.remove();
+        Empleador.remove();
         return reply('Empleador deleted succesfully');
       }else if(!err){
         return reply(boom.notFound());
