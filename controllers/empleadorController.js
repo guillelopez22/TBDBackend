@@ -74,6 +74,21 @@ exports.deleteEmpleador = {
     });
   }
 }
+exports.deleteEmpleadorRTN = {
+
+  handler: function(request, reply){
+    empleador.findOne({'rtn' : request.params.rtn}, function(err, Empleador){
+      if(err){
+        return reply(boom.badRequest("Could not delete Empleador"));
+      }else if(!err && Empleador){
+        Empleador.remove();
+        return reply('Empleador deleted succesfully');
+      }else if(!err){
+        return reply(boom.notFound());
+      }
+    });
+  }
+}
 exports.createEmpleador = {
 
   handler: function(request, reply){

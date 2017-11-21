@@ -41,6 +41,11 @@ exports.endpoints = [
 			config: empleadoController.deleteEmpleado
  	},
 	{
+			method: 'DELETE',
+			path: '/empleados/delete/{identificacion}',
+			config: empleadoController.deleteEmpleadoId
+ 	},
+	{
 			method: 'POST',
 			path: '/empleados/create',
 			config: empleadoController.createEmpleado
@@ -71,6 +76,11 @@ exports.endpoints = [
 			method: 'DELETE',
 			path: '/empleadores/delete/{_id}',
 			config: empleadorController.deleteEmpleador
+ 	},
+	{
+			method: 'DELETE',
+			path: '/empleadores/delete/{rtn}',
+			config: empleadorController.deleteEmpleadorRTN
  	},
 	{
 			method: 'POST',
